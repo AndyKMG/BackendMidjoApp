@@ -1,0 +1,38 @@
+{
+  "name": "midjo_app",
+  "version": "1.0.0",
+  "description": "My flutter backend app",
+  "main": "app.js",
+  "scripts": {
+    "start": "node src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndyKMG/BackendMidjoApp.git"
+  },
+  "keywords": [
+    "Transport",
+    "App",
+    "Flutter",
+    "app"
+  ],
+  "author": "AndyKMG",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AndyKMG/BackendMidjoApp/issues"
+  },
+  "homepage": "https://github.com/AndyKMG/BackendMidjoApp#readme",
+  "dependencies": {
+    "axios": "^1.6.5",
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "express-myconnection": "^1.0.4",
+    "geolib": "^3.3.4",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.3.0",
+    "mongoose": "^8.1.0",
+    "qrcode": "^1.5.3"
+  }
+}
