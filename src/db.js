@@ -13,10 +13,7 @@ const dburl = "mongodb+srv://admin:admin@cluster0.0b330r1.mongodb.net/DrivingGes
 mongoose.set("strictQuery" , false)
 
 module.exports = () =>{
-  return mongoose.connect(dburl, 
-    {
-      useNewUrlParser: true, useunifiedTopology: true
-    })
+  return mongoose.connect(dburl,)
 }
 
 

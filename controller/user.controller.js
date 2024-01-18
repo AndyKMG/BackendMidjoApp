@@ -102,11 +102,13 @@ function getCurrentDate() {
   const currentDay = today.getDate().toString().padStart(2, '0');
   const currentMonth = (today.getMonth() + 1).toString().padStart(2, '0');
   const currentYear = today.getFullYear();
+  const currentHour = today.getHours();
 
-  return `${currentDay}/${currentMonth}/${currentYear}`;
+
+  return `${currentDay}/${currentMonth}/${currentYear}/${currentHour}`;
 }
 
-function checkTripDate(today, dateString) {
+function checkTripDate(today, dateString, heureReserve) {
 
   // Etablissement du format de date
   const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
@@ -122,8 +124,9 @@ function checkTripDate(today, dateString) {
     console.log(today + "-" + dateString)
     // Récupération dans des variables distinctes des petits éléments
     // constitutifs des dates du jour et du User à savoir jj mm et aaaa
+    const [hour, minute] = heureReserve.split(':').map(String)
     const [day, month, year] = dateString.split('/').map(String);
-    const [currentDay, currentMonth, currentYear] = today.split('/').map(String);
+    const [currentDay, currentMonth, currentYear, currentHour] = today.split('/').map(String);
 
     if (year < currentYear) {
       return false;
@@ -146,7 +149,12 @@ function checkTripDate(today, dateString) {
       }
     }
     if (year === currentYear && month === currentMonth && currentDay === day) {
-      return false;
+      if (hour === currentHour)
+        return false;
+      if (hour > (currentHour + 12))
+        return true;
+      else
+        return false;
     }
 
 

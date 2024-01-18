@@ -1,17 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const jwt = require('jsonwebtoken');
-const mongoClient = require('mongodb').MongoClient;
-//const mysql = require('mysql');
-const connection = require('express-myconnection');
 const port = 3030
 const geolib = require('geolib')
 const app = express();
-const router = express.Router();
-const qrcode = require('qrcode');
 
 const connectDB = require("./db.js")
-const { CreateUser, CheckUser, insertToken, checkToken, RecupId, getUser, findToken, ReserveTicket, updateToken, findTicket, insertPaiement, findPaiement } = require('./dbOperations.js');
+const { CreateUser, CheckUser, insertToken, checkToken, RecupId, ReserveTicket, updateToken, findTicket, insertPaiement } = require('./dbOperations.js');
 const { VerifUserInfos, SendMsg, createToken, checkTripDate, getCurrentDate } = require("../controller/user.controller.js")
 const { getCoordinates, generateQRCode } = require("./googleMapsApi.js")
 var userId;
@@ -133,9 +127,10 @@ app.use("/createTrip", async (req, res) => {
 
         // Verification de la conformitée de la date entree par le User
         const dateReserve = data['dateReserve']
+        const hourReserve = data['heureReserve']
         const today = getCurrentDate()
         console.log(today + "-" + dateReserve)
-        const validDate = checkTripDate(today, dateReserve)
+        const validDate = checkTripDate(today, dateReserve, hourReserve)
 
         console.log(" validDate" + "" + validDate)
 
@@ -230,10 +225,6 @@ app.use("/createTrip", async (req, res) => {
 })
 
 
-
-
-
-
 // API de Validation de Paiement 
 app.use("/validPaiement", async (req, res) => {
     // Recuperation du corp de la requete
@@ -289,10 +280,6 @@ app.post('/generateQrCode', async (req, res) => {
     }
   });
 
-  
-// app.listen(port , ()=>{
-//     console.log('Server is listen pn port :' + port)
-// })
 
 connectDB()
     .then(() => {
