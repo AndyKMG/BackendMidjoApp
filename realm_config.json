@@ -1,0 +1,7 @@
+{
+    "app_id": "midjo-qmilc",
+    "config_version": 20210101,
+    "name": "Midjo",
+    "provider_region": "aws-eu-central-1",
+    "deployment_model": "LOCAL"
+}
